@@ -7,31 +7,26 @@ import plotly.express as px
 st.set_page_config(
     page_title="AI Financial Expense Audit System",
     page_icon="💰",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    layout="wide"
 )
-with st.sidebar:
-    st.title("TEST SIDEBAR")
-    st.write("IF YOU SEE THIS, SIDEBAR WORKS")
-st.sidebar.title("TEST SIDEBAR")
-st.sidebar.success("Sidebar Loaded Successfully")
-#st.markdown("""
-#<style>
-#
-#.stApp {
-#    background-color:#F8FAFC;
-#}
-#
-#div[data-testid="stMetric"]{
-#    background:white;
-#    padding:20px;
-#    border-radius:15px;
-#    border-left:6px solid #2563EB;
-#    box-shadow:0 2px 8px rgba(0,0,0,0.1);
-#}
-#
-#</style>
-#""", unsafe_allow_html=True)
+
+st.markdown("""
+<style>
+
+.stApp {
+    background-color:#F8FAFC;
+}
+
+div[data-testid="stMetric"]{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    border-left:6px solid #2563EB;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+</style>
+""", unsafe_allow_html=True)
 st.markdown("""
 <h1 style='text-align:center'>
 💰 Financial Expense Anomaly Detection for Corporate Auditing
@@ -43,14 +38,39 @@ AI Powered Audit Prioritization System
 """, unsafe_allow_html=True)
 
 # Load data
-data = pd.read_csv("data/expenses.csv")
+uploaded_file = st.sidebar.file_uploader(
+    "Upload Expense Dataset",
+    type=["csv"]
+)
+
+if uploaded_file is not None:
+    data = pd.read_csv(uploaded_file)
+else:
+    data = pd.read_csv("data/expenses.csv")
+required_columns = [
+    "Expense_ID",
+    "Employee_ID",
+    "Department",
+    "Expense_Type",
+    "Amount",
+    "Vendor",
+    "Date"
+]
+
+missing = [
+    col for col in required_columns
+    if col not in data.columns
+]
+
+if missing:
+    st.error(
+        f"Missing columns: {', '.join(missing)}"
+    )
+    st.stop()
 data["Date"] = pd.to_datetime(data["Date"])
 
 # Sidebar filter
 st.sidebar.header("Dashboard Filters")
-st.write("HELLO FROM GITHUB")
-st.sidebar.write("SIDEBAR TEST")
-st.write("MAIN PAGE LOADED")
 st.sidebar.markdown("""
 ### Model Information
 
