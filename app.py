@@ -7,8 +7,10 @@ import plotly.express as px
 st.set_page_config(
     page_title="AI Financial Expense Audit System",
     page_icon="💰",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
+st.sidebar.title("TEST SIDEBAR")
 st.sidebar.success("Sidebar Loaded Successfully")
 #st.markdown("""
 #<style>
