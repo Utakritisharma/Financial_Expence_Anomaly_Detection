@@ -9,7 +9,7 @@ st.set_page_config(
     page_icon="💰",
     layout="wide"
 )
-
+st.sidebar.success("Sidebar Loaded Successfully")
 st.markdown("""
 <style>
 
