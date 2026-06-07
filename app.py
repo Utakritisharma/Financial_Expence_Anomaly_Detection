@@ -38,12 +38,49 @@ AI Powered Audit Prioritization System
 """, unsafe_allow_html=True)
 
 # Load data
-data = pd.read_csv("data/expenses.csv")
+uploaded_file = st.sidebar.file_uploader(
+    "Upload Expense Dataset",
+    type=["csv"]
+)
+
+if uploaded_file is not None:
+    data = pd.read_csv(uploaded_file)
+else:
+    data = pd.read_csv("data/expenses.csv")
+required_columns = [
+    "Expense_ID",
+    "Employee_ID",
+    "Department",
+    "Expense_Type",
+    "Amount",
+    "Vendor",
+    "Date"
+]
+
+missing = [
+    col for col in required_columns
+    if col not in data.columns
+]
+
+if missing:
+    st.error(
+        f"Missing columns: {', '.join(missing)}"
+    )
+    st.stop()
 data["Date"] = pd.to_datetime(data["Date"])
 
 # Sidebar filter
 st.sidebar.header("Dashboard Filters")
+st.sidebar.markdown("""
+### Model Information
 
+Algorithm: Isolation Forest
+
+Type: Unsupervised Learning
+
+Purpose:
+Detect unusual expense patterns for audit prioritization.
+""")
 departments = data["Department"].unique()
 
 selected_departments = st.sidebar.multiselect(
@@ -164,7 +201,9 @@ data["Reason"] = data.apply(
 total_expenses = len(data)
 total_amount = data["Amount"].sum()
 suspicious_count = len(data[data["Anomaly"] == "Suspicious"])
-high_risk_count = len(data[data["Risk_Level"] == "High Risk"])
+high_risk_count = len(
+    data[data["Risk_Level"] == "🔴 High Risk"]
+)
 critical_count = len(
     data[data["Audit_Priority"] == "Critical"]
 )
