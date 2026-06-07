@@ -2,7 +2,17 @@ import pandas as pd
 import random
 
 departments = ["Finance", "HR", "IT", "Sales"]
-expense_types = ["Travel", "Food", "Hotel", "Software", "Office Supplies"]
+expense_types = [
+    "Travel",
+    "Food",
+    "Hotel",
+    "Software",
+    "Office Supplies",
+    "Training",
+    "Consulting",
+    "Marketing",
+    "Equipment"
+]
 
 data = []
 
