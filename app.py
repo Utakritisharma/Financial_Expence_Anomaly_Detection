@@ -9,6 +9,7 @@ st.set_page_config(
     page_icon="💰",
     layout="wide"
 )
+st.write("HELLO FROM GITHUB")
 st.sidebar.success("Sidebar Loaded Successfully")
 st.markdown("""
 <style>
