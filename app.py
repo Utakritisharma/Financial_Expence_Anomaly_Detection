@@ -43,6 +43,7 @@ data["Date"] = pd.to_datetime(data["Date"])
 
 # Sidebar filter
 st.sidebar.header("Dashboard Filters")
+st.write("HELLO FROM GITHUB")
 st.sidebar.write("SIDEBAR TEST")
 st.sidebar.markdown("""
 ### Model Information
