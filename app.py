@@ -10,6 +10,9 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+with st.sidebar:
+    st.title("TEST SIDEBAR")
+    st.write("IF YOU SEE THIS, SIDEBAR WORKS")
 st.sidebar.title("TEST SIDEBAR")
 st.sidebar.success("Sidebar Loaded Successfully")
 #st.markdown("""
@@ -47,6 +50,7 @@ data["Date"] = pd.to_datetime(data["Date"])
 st.sidebar.header("Dashboard Filters")
 st.write("HELLO FROM GITHUB")
 st.sidebar.write("SIDEBAR TEST")
+st.write("MAIN PAGE LOADED")
 st.sidebar.markdown("""
 ### Model Information
 
